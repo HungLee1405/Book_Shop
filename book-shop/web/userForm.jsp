@@ -77,7 +77,7 @@
 
                             <div class="button-group">
                                 <input type="hidden" name="keyword" value="${keyword}" />
-                            <input type="submit" value="${isEdit ? 'Update user' : 'Create Account'}"/>
+                            <input type="submit" value="${isUpdate ? 'Update user' : 'Create Account'}"/>
                             <input type="reset" value="Reset"/>
                         </div>
                     </form>
