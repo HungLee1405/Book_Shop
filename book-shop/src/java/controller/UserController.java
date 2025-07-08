@@ -104,13 +104,25 @@ public class UserController extends HttpServlet {
         String birthDay = request.getParameter("birthDay");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
-        
+
+        if (userName == null || userName.trim().isEmpty()) {
+            checkError += "<br/>Username is required.";
+        }
+
+        if (fullName == null || fullName.trim().isEmpty()) {
+            checkError += "<br/>Full Name is required.";
+        }
+
+        if (password == null || password.trim().isEmpty()) {
+            checkError += "<br/>Password is required.";
+        }
+
         Date BirthDay = null;
         try {
             if (birthDay != null && !birthDay.isEmpty()) {
-                BirthDay = Date.valueOf(birthDay); // yyyy-MM-dd
+                BirthDay = Date.valueOf(birthDay); 
 
-                // ✅ Check if date is in the future
+                
                 Date today = new Date(System.currentTimeMillis());
                 if (BirthDay.after(today)) {
                     checkError += "<br/> Birth Day must be in the past.";
@@ -119,19 +131,21 @@ public class UserController extends HttpServlet {
         } catch (Exception e) {
             checkError += "<br/> Invalid Birth Day.";
         }
-
-        if (checkError.isEmpty()) {
-            message = "Add product successfully.";
-        }
-
+        
         UserDTO user = new UserDTO(userName, fullName, password, phone, email, BirthDay, address, phone, true);
-        if (!udao.create(user)) {
-            checkError += "<br/>Can not add new product.";
+        
+        if (checkError.isEmpty()) {
+            if (udao.create(user)) {
+                message = "Create Account successfully.";
+            } else {
+                checkError += "Cannot Create Account.";
+            }
         }
 
-        request.setAttribute("user", user);
-        request.setAttribute("checkError", checkError);
-        request.setAttribute("message", message);
+            request.setAttribute("user", user);
+            request.setAttribute("checkError", checkError);
+            request.setAttribute("message", message);
+
         return "userForm.jsp";
     }
 
@@ -141,13 +155,13 @@ public class UserController extends HttpServlet {
 
         int id_value = Integer.parseInt(productId);
 
-            UserDTO user = udao.getUserByUserName(keyword);
-            if (user != null) {
-                request.setAttribute("keyword", keyword);
-                request.setAttribute("user", user);
-                request.setAttribute("isUpdate", true);
-                return "userForm.jsp";
-            
+        UserDTO user = udao.getUserByUserName(keyword);
+        if (user != null) {
+            request.setAttribute("keyword", keyword);
+            request.setAttribute("user", user);
+            request.setAttribute("isUpdate", true);
+            return "userForm.jsp";
+
         }
         return handleRegister(request, response);
     }
