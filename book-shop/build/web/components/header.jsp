@@ -90,7 +90,7 @@
                                     <li class="menu-item has-sub">
                                         <a href="#pages" class="nav-link">Admin</a>
                                         <ul>                                       
-                                            <li><a href="productEdit.jsp">Products</a></li>                                        
+                                            <li><a href="MainController?action=viewProductList">Products</a></li>                                        
                                         </ul>
                                     </li>
                                 </c:if>

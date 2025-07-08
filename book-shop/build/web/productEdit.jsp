@@ -14,9 +14,7 @@
 <c:set var="keyword" value="${requestScope.keyword}" />
 
 <c:set var="productList" value="${requestScope.list}" />
-<c:set var="hasKeyword" value="${not empty keyword}" />
 <c:set var="hasProducts" value="${not empty productList}" />
-<c:set var="productCount" value="${fn:length(productList)}" />
 <c:set var="keywordParam" value="${hasKeyword ? keyword : ''}" />
 
 <!DOCTYPE html>
@@ -42,26 +40,12 @@
                         </div>
                     </div>
 
-                    <div class="search-section">
-                        <label>Search by name:</label>
-                        <form action="ProductController" method="post">
-                            <input type="hidden" name="action" value="searchProduct"/>
-                            <input type="text" name="keyword" value="${keywordParam}" placeholder="Enter product name..."/>
-                            <input type="submit" value="Search"/>
-                        </form>
-                    </div>
 
                     <c:if test="${isAdmin}">
                         <a href="productForm.jsp" class="add-product-link">Add New Product</a>
                     </c:if>
 
-                    <c:choose>
-                        <c:when test="${hasProducts and productCount == 0}">
-                            <div>
-                                No products have names that match the keyword!
-                            </div>
-                        </c:when>
-                        <c:when test="${hasProducts and productCount > 0}">
+                        <c:if test="${not empty productList}">
                             <div class="table-container">
                                 <table>
                                     <thead>
@@ -115,8 +99,7 @@
                                     </tbody>    
                                 </table>
                             </div>
-                        </c:when>
-                    </c:choose>
+                        </c:if>
                 </div>
             </c:otherwise>
         </c:choose>

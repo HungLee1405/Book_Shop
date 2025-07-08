@@ -48,6 +48,8 @@ public class ProductController extends HttpServlet {
 
             } else if (action.equals("viewProduct")) {
                 url = handleViewProduct(request, response);
+            } else if (action.equals("viewProductList")){
+                url = handleShowProductList(request, response);
             }
         } catch (Exception e) {
         } finally {
@@ -68,6 +70,12 @@ public class ProductController extends HttpServlet {
         List<ProductDTO> list = pdao.getProductsByName(keyword);
         request.setAttribute("list", list);
         request.setAttribute("keyword", keyword);
+        return "productEdit.jsp";
+    }
+
+    private String handleShowProductList(HttpServletRequest request, HttpServletResponse response) {
+        List<ProductDTO> productList = pdao.getAll(); // Lấy toàn bộ sản phẩm
+        request.setAttribute("list", productList);            // Đặt vào requestScope
         return "productEdit.jsp";
     }
 

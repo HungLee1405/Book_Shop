@@ -44,7 +44,8 @@ public class MainController extends HttpServlet {
                 || "changeProductStatus".equals(action)
                 || "editProduct".equals(action)
                 || "updateProduct".equals(action)
-                || "viewProduct".equals(action);
+                || "viewProduct".equals(action)
+                || "viewProductList".equals(action);
     }
 
     private boolean isCategoryAction(String action) {
