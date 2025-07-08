@@ -1,0 +1,19 @@
+
+#promo-banner {
+    width: 100%;
+    background-color: #f4f4f4;
+    padding: 0;
+    margin-bottom: 40px;
+}
+
+.banner-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.banner-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}

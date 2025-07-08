@@ -1,0 +1,46 @@
+.main-wrapper {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.category-box {
+    flex: 1;
+    max-width: 250px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    height: fit-content;
+}
+
+.category-box h5 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.category-box ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.category-box ul li {
+    margin-bottom: 10px;
+}
+
+.category-box ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.category-box ul li a:hover {
+    text-decoration: underline;
+}
+
+.product-box {
+    flex: 3;
+    background-color: #f1efe9;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+}
