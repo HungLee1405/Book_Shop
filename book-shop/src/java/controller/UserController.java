@@ -12,8 +12,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
 import model.UserDAO;
 import model.UserDTO;
+import utils.AuthUtils;
 import utils.PasswordUtlis;
 
 /**
@@ -22,6 +24,8 @@ import utils.PasswordUtlis;
  */
 @WebServlet(name = "UserController", urlPatterns = {"/UserController"})
 public class UserController extends HttpServlet {
+    
+    UserDAO udao = new UserDAO();
 
     private static final String WELCOME_PAGE = "login.jsp";
     private static final String LOGIN_PAGE = "index.jsp";
@@ -29,9 +33,9 @@ public class UserController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String url = LOGIN_PAGE;
-        
+
         try {
             String action = request.getParameter("action");
             if ("login".equals(action)) {
@@ -53,15 +57,15 @@ public class UserController extends HttpServlet {
     }
 
     private String handleLogin(HttpServletRequest request, HttpServletResponse response) {
-        
+
         String url = LOGIN_PAGE;
-        
+
         HttpSession session = request.getSession();
         String username = request.getParameter("strUserName");
         String password = request.getParameter("strPassword");
         //password = PasswordUtlis.encryptSHA256(password);
         UserDAO userDAO = new UserDAO();
-        
+
         if (userDAO.login(username, password)) {
             // Dang nhap thanh cong
             url = "index.jsp";
@@ -76,9 +80,9 @@ public class UserController extends HttpServlet {
     }
 
     private String handleLogout(HttpServletRequest request, HttpServletResponse response) {
-        
+
         HttpSession session = request.getSession();
-        
+
         if (session != null) {
             // get session info
             UserDTO user = (UserDTO) session.getAttribute("user");
@@ -91,11 +95,61 @@ public class UserController extends HttpServlet {
     }
 
     private String handleRegister(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String checkError = "";
+        String message = "";
+        String userName = request.getParameter("userName");
+        String fullName = request.getParameter("fullName");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String birthDay = request.getParameter("birthDay");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        
+        Date BirthDay = null;
+        try {
+            if (birthDay != null && !birthDay.isEmpty()) {
+                BirthDay = Date.valueOf(birthDay); // yyyy-MM-dd
+
+                // ✅ Check if date is in the future
+                Date today = new Date(System.currentTimeMillis());
+                if (BirthDay.after(today)) {
+                    checkError += "<br/> Birth Day must be in the past.";
+                }
+            }
+        } catch (Exception e) {
+            checkError += "<br/> Invalid Birth Day.";
+        }
+
+        if (checkError.isEmpty()) {
+            message = "Add product successfully.";
+        }
+
+        UserDTO user = new UserDTO(userName, fullName, password, phone, email, BirthDay, address, phone, true);
+        if (!udao.create(user)) {
+            checkError += "<br/>Can not add new product.";
+        }
+
+        request.setAttribute("user", user);
+        request.setAttribute("checkError", checkError);
+        request.setAttribute("message", message);
+        return "userForm.jsp";
     }
 
     private String handleUpdateProfile(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String productId = request.getParameter("productId");
+        String keyword = request.getParameter("keyword");
+
+        int id_value = Integer.parseInt(productId);
+
+            UserDTO user = udao.getUserByUserName(keyword);
+            if (user != null) {
+                request.setAttribute("keyword", keyword);
+                request.setAttribute("user", user);
+                request.setAttribute("isUpdate", true);
+                return "userForm.jsp";
+            
+        }
+        return handleRegister(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

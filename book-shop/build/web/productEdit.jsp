@@ -81,11 +81,11 @@
                                     <tbody>
                                         <c:forEach var="product" items="${productList}">
                                             <tr>
-                                                <td>${product.id}</td>
-                                                <td>${product.name}</td>
+                                                <td>${product.productId}</td>
+                                                <td>${product.productName}</td>
                                                 <td>${product.description}</td>
-                                                <td>VND ${product.price}</td>
-                                                <td>${product.catID}</td>
+                                                <td>VND ${product.unitPrice}</td>
+                                                <td>${product.category}</td>
                                                 <td>${product.author}</td>
                                                 <td class="status-inactive">
                                                     ${product.status ? 'Active' : 'Inactive'}
@@ -95,14 +95,14 @@
                                                         <div class="action-buttons">
                                                             <form action="MainController" method="post">
                                                                 <input type="hidden" name="action" value="editProduct"/>
-                                                                <input type="hidden" name="productId" value="${product.id}"/>
+                                                                <input type="hidden" name="productId" value="${product.productId}"/>
                                                                 <input type="hidden" name="keyword" value="${keywordParam}" />
                                                                 <input type="submit" value="Edit" class="edit-btn" />
                                                             </form>
 
                                                             <form action="MainController" method="post">
                                                                 <input type="hidden" name="action" value="changeProductStatus"/>
-                                                                <input type="hidden" name="productId" value="${product.id}"/>
+                                                                <input type="hidden" name="productId" value="${product.productId}"/>
                                                                 <input type="hidden" name="keyword" value="${keywordParam}" />
                                                                 <input type="submit" value="Delete" class="delete-btn"
                                                                        onclick="return confirm('Are you sure you want to delete this product?')"/>

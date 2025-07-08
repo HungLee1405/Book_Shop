@@ -17,6 +17,8 @@ import utils.DbUtils;
  * @author trang
  */
 public class UserDAO {
+    
+    private static final String CREATE_USER = "INSERT INTO tblUsers (UserName, FullName, Password, RoleID, Email, BirthDay, Address, Phone, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public UserDAO() {
 
@@ -107,5 +109,53 @@ public class UserDAO {
             return false;
         }
     }
+    
+    public boolean create(UserDTO user) {
+        boolean success = false;
+        Connection conn = null;
+        PreparedStatement ps = null;
 
+        try {
+            conn = DbUtils.getConnection();
+            ps = conn.prepareStatement(CREATE_USER);
+
+            ps.setString(1, user.getUserName());
+            ps.setString(2, user.getFullName());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, "MB");
+            ps.setString(5, user.getEmail());
+            ps.setDate(6, (java.sql.Date) user.getBirthDay());
+            ps.setString(7, user.getAddress());
+            ps.setString(8, user.getPhone());
+            ps.setBoolean(9, user.isStatus());
+
+            int rowsAffected = ps.executeUpdate();
+            success = (rowsAffected > 0);
+
+        } catch (Exception e) {
+            System.err.println("Error in create(): " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, ps, null);
+        }
+
+        return success;
+    }
+
+    private void closeResources(Connection conn, PreparedStatement ps, ResultSet rs) {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            System.err.println("Error closing resources: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

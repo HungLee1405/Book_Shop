@@ -39,13 +39,13 @@
                             <c:if test="${isEdit}">
                                 <div class="form-group">
                                     <label for="id">ID <span class="required">*</span></label>
-                                    <input type="text" id="id" name="id" value="${product.id}" readonly />
+                                    <input type="text" id="id" name="id" value="${product.productId}" readonly />
                                 </div>
                             </c:if>
 
                             <div class="form-group">
                                 <label for="name">Name <span class="required">*</span></label>
-                                <input type="text" id="name" name="name" required value="${product.name}" />
+                                <input type="text" id="name" name="name" required value="${product.productName}" />
                             </div>
 
                             <div class="form-group">
@@ -62,12 +62,12 @@
                             <div class="form-group">
                                 <label for="price">Price <span class="required">*</span></label>
                                 <input type="number" id="price" name="price" required min="0" step="0.01"
-                                       placeholder="0.00" value="${product.price}" />
+                                       placeholder="0.00" value="${product.unitPrice}" />
                             </div>
 
                             <div class="form-group">
                                 <label for="catID">Category_id</label>
-                                <input type="text" id="catID" name="catID" value="${product.catID}" />
+                                <input type="text" id="catID" name="catID" value="${product.category}" />
                             </div>
 
                             <div class="form-group">
