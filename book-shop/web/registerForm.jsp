@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : user-account
     Created on : Jul 8, 2025, 8:48:11 PM
     Author     : pc
@@ -11,13 +11,13 @@
 <c:set var="checkError" value="${requestScope.checkError}" />
 <c:set var="message" value="${requestScope.message}" />
 <c:set var="user" value="${requestScope.user}" />
-<c:set var="isUpdate" value="${requestScope.isUpdate}" />
 <c:set var="keyword" value="${requestScope.keyword}" />
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="assets/css02/productForm.css"> 
     </head>
     <body>
         <c:choose>
@@ -25,19 +25,13 @@
 
                 <div class="header">
                     <a href="login.jsp" class="back-link">← Back to login page</a>
-                    <h1>${isUpdate ? "UPDATE USER INFORMATION" : "REGISTER USER"}</h1>
+                    <h1>REGISTER USER</h1>
                 </div>
 
                 <div class="form-container">
                     <form action="MainController" method="post">
-                        <input type="hidden" name="action" value="${isUpdate ? 'updateProfile' : 'register'}"/>
+                        <input type="hidden" name="action" value="register"/>
 
-                        <c:if test="${isUpdate}">
-                            <div class="form-group">
-                                <label for="id">ID <span class="required">*</span></label>
-                                <input type="text" id="id" name="id" value="${user.userID}" readonly />
-                            </div>
-                        </c:if>
 
                         <div class="form-group">
                             <label for="userName">User Name <span class="required">*</span></label>
@@ -56,7 +50,7 @@
 
                         <div class="form-group">
                             <label for="email">Email <span class="required">*</span></label>
-                            <input type="text" id="email" name="email" value="${user.email}" />
+                            <input type="email" id="email" name="email" value="${user.email}" />
                         </div>
 
                         <div class="form-group">
@@ -77,7 +71,7 @@
 
                             <div class="button-group">
                                 <input type="hidden" name="keyword" value="${keyword}" />
-                            <input type="submit" value="${isUpdate ? 'Update user' : 'Create Account'}"/>
+                            <input type="submit" value="Create Account"/>
                             <input type="reset" value="Reset"/>
                         </div>
                     </form>

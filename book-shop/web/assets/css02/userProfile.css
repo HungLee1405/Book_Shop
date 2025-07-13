@@ -1,0 +1,249 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: linear-gradient(135deg, #f5f2ed 0%, #ede8e0 100%);
+    padding: 20px;
+}
+
+.profile-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Cột trái nhỏ hơn, cột phải rộng hơn */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Avatar Section */
+.avatar-section {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+    border: 1px solid #333333;
+    margin-bottom: 30px;
+}
+
+.avatar-section h3,
+.wallet-section h3 {
+    text-align: center;       /* căn giữa */
+    font-size: 23px;          /* tăng kích cỡ */
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.avatar-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e0e0e0;
+    display: block;
+    margin: 0 auto 15px;
+}
+
+
+/* Wallet Section */
+.wallet-section {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+    border: 1px solid #333333;
+}
+
+
+.wallet-box {
+    background-color: #4a5568;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Form Section */
+.form-section {
+    grid-column: 1 / -1;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+    border: 1px solid #333333;
+}
+
+.form-section h2 {
+    font-size: 30px;         /* tăng kích thước */
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;      /* căn giữa */
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    align-items: start;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+    padding: 12px 16px;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f8f9fa;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus {
+    outline: none;
+    border-color: #4285f4;
+    background-color: #ffffff;
+}
+
+input[readonly] {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+/* Username takes full width */
+input[name="userName"] {
+    grid-column: 1 / -1;
+}
+
+/* Full name takes full width */
+input[name="fullName"] {
+    grid-column: 1 / -1;
+}
+
+/* Address takes full width */
+input[name="address"] {
+    grid-column: 1 / -1;
+}
+
+/* Email takes full width */
+input[name="email"] {
+    grid-column: 1 / -1;
+}
+
+/* Phone and birthdate side by side */
+.phone-birth-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+button[type="submit"] {
+    grid-column: 1 / -1;             /* Chiếm toàn bộ dòng */
+    width: 100%;                     /* Chiều rộng tối đa */
+    background-color: #4a90e2;
+    color: white;
+    padding: 12px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+    text-align: center;
+}
+
+button[type="submit"]:hover {
+    background-color: #357bd8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Error and Success Messages */
+.error-message {
+    grid-column: 1 / -1;
+    background-color: #ffeaa7;
+    color: #d63031;
+    padding: 12px;
+    border-radius: 4px;
+    margin-top: 15px;
+    border-left: 4px solid #d63031;
+}
+
+.success-message {
+    grid-column: 1 / -1;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 4px;
+    margin-top: 15px;
+    border-left: 4px solid #28a745;
+}
+
+.avatar-section h3,
+.wallet-section h3,
+.form-section h2 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .form-section {
+        grid-column: 1;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .phone-birth-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    input[name="userName"],
+    input[name="fullName"],
+    input[name="address"],
+    input[name="email"] {
+        grid-column: 1;
+    }
+
+    .left-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .right-column {
+        display: block;
+    }
+}

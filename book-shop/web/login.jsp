@@ -39,7 +39,7 @@
                             </div>
                             <div>
                                 <input type="submit" value="Login"/>
-                                <a href="userForm.jsp" class="back-link">Register</a>
+                                <a href="registerForm.jsp" class="back-link">Register</a>
                             </div>
                         </form>
                         <c:if test="${not empty requestScope.message}">

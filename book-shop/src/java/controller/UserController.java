@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import model.UserDAO;
 import model.UserDTO;
+import model.WalletDAO;
 import utils.AuthUtils;
 import utils.PasswordUtlis;
 
@@ -26,6 +27,7 @@ import utils.PasswordUtlis;
 public class UserController extends HttpServlet {
     
     UserDAO udao = new UserDAO();
+    WalletDAO wdao = new WalletDAO();
 
     private static final String WELCOME_PAGE = "login.jsp";
     private static final String LOGIN_PAGE = "index.jsp";
@@ -146,24 +148,37 @@ public class UserController extends HttpServlet {
             request.setAttribute("checkError", checkError);
             request.setAttribute("message", message);
 
-        return "userForm.jsp";
+        return "registerForm.jsp";
     }
 
     private String handleUpdateProfile(HttpServletRequest request, HttpServletResponse response) {
-        String productId = request.getParameter("productId");
-        String keyword = request.getParameter("keyword");
+        String userName = request.getParameter("userName");
+        String fullName = request.getParameter("fullName");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String birthDayStr = request.getParameter("birthDay");
 
-        int id_value = Integer.parseInt(productId);
-
-        UserDTO user = udao.getUserByUserName(keyword);
-        if (user != null) {
-            request.setAttribute("keyword", keyword);
-            request.setAttribute("user", user);
-            request.setAttribute("isUpdate", true);
-            return "userForm.jsp";
-
+        Date birthDay = null;
+        if (birthDayStr != null && !birthDayStr.isEmpty()) {
+            try {
+                birthDay = Date.valueOf(birthDayStr);
+            } catch (Exception e) {
+                request.setAttribute("checkError", "Invalid birthdate.");
+                return "userProfile.jsp";
+            }
         }
-        return handleRegister(request, response);
+
+        UserDTO user = new UserDTO(userName, fullName, "", phone, email, birthDay, address, phone, true);
+        boolean success = udao.updateUser(user);
+        if (success) {
+            request.getSession().setAttribute("user", user); // cập nhật session
+            request.setAttribute("message", "Profile updated successfully.");
+        } else {
+            request.setAttribute("checkError", "Update failed.");
+        }
+
+        return "userProfile.jsp";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
