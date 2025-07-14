@@ -25,7 +25,7 @@ import utils.PasswordUtlis;
  */
 @WebServlet(name = "UserController", urlPatterns = {"/UserController"})
 public class UserController extends HttpServlet {
-    
+
     UserDAO udao = new UserDAO();
     WalletDAO wdao = new WalletDAO();
 
@@ -48,6 +48,8 @@ public class UserController extends HttpServlet {
                 url = handleRegister(request, response);
             } else if ("updateProfile".equals(action)) {
                 url = handleUpdateProfile(request, response);
+            } else if ("changePassword".equals(action)) {
+                url = handlePasswordChanging(request, response);
             } else {
                 request.setAttribute("message", "Invalid action: " + action);
                 url = LOGIN_PAGE;
@@ -102,6 +104,7 @@ public class UserController extends HttpServlet {
         String userName = request.getParameter("userName");
         String fullName = request.getParameter("fullName");
         String password = request.getParameter("password");
+        String confirmPass = request.getParameter("confirmPassword");
         String email = request.getParameter("email");
         String birthDay = request.getParameter("birthDay");
         String address = request.getParameter("address");
@@ -118,13 +121,16 @@ public class UserController extends HttpServlet {
         if (password == null || password.trim().isEmpty()) {
             checkError += "<br/>Password is required.";
         }
+        
+        if (!password.equals(confirmPass)) {
+            checkError = "password and confirmation do not match.";
+        }
 
         Date BirthDay = null;
         try {
             if (birthDay != null && !birthDay.isEmpty()) {
-                BirthDay = Date.valueOf(birthDay); 
+                BirthDay = Date.valueOf(birthDay);
 
-                
                 Date today = new Date(System.currentTimeMillis());
                 if (BirthDay.after(today)) {
                     checkError += "<br/> Birth Day must be in the past.";
@@ -133,9 +139,9 @@ public class UserController extends HttpServlet {
         } catch (Exception e) {
             checkError += "<br/> Invalid Birth Day.";
         }
-        
+
         UserDTO user = new UserDTO(userName, fullName, password, phone, email, BirthDay, address, phone, true);
-        
+
         if (checkError.isEmpty()) {
             if (udao.create(user)) {
                 message = "Create Account successfully.";
@@ -144,9 +150,9 @@ public class UserController extends HttpServlet {
             }
         }
 
-            request.setAttribute("user", user);
-            request.setAttribute("checkError", checkError);
-            request.setAttribute("message", message);
+        request.setAttribute("user", user);
+        request.setAttribute("checkError", checkError);
+        request.setAttribute("message", message);
 
         return "registerForm.jsp";
     }
@@ -219,5 +225,34 @@ public class UserController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private String handlePasswordChanging(HttpServletRequest request, HttpServletResponse response) {
+        String oldPass = request.getParameter("oldPassword");
+        String newPass = request.getParameter("newPassword");
+        String confirmPass = request.getParameter("confirmPassword");
+
+        HttpSession session = request.getSession();
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        String checkError = "";
+        String message = "";
+
+        if (!newPass.equals(confirmPass)) {
+            checkError = "New password and confirmation do not match.";
+        } else if (!udao.checkPassword(user.getUserName(), oldPass)) {
+            checkError = "Current password is incorrect.";
+        } else {
+            boolean success = udao.updatePassword(user.getUserName(), newPass);
+            if (success) {
+                message = "Password updated successfully!";
+            } else {
+                checkError = "Failed to update password.";
+            }
+        }
+
+        request.setAttribute("checkError", checkError);
+        request.setAttribute("message", message);
+        return "changePassword.jsp";
+    }
 
 }

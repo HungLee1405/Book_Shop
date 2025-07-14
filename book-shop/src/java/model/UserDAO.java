@@ -21,7 +21,6 @@ public class UserDAO {
     private static final String CREATE_USER = "INSERT INTO tblUsers (UserName, FullName, Password, RoleID, Email, BirthDay, Address, Phone, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_USER = "UPDATE tblUsers SET FullName = ?, Email = ?, BirthDay = ?, Address = ?, Phone = ? WHERE UserName = ?";
 
-
     public UserDAO() {
 
     }
@@ -96,6 +95,32 @@ public class UserDAO {
         return userList;
     }
 
+    public boolean checkPassword(String username, String inputPassword) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean matched = false;
+
+        try {
+            conn = DbUtils.getConnection();
+            String sql = "SELECT Password FROM tblUsers WHERE UserName = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String dbPassword = rs.getString("Password");
+                matched = inputPassword.equals(dbPassword); // Có thể dùng hash nếu cần
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, ps, rs);
+        }
+
+        return matched;
+    }
+
     public boolean updatePassword(String username, String newPassword) {
         String sql = "UPDATE tblUsers SET password = ? WHERE UserName = ?";
         try {
@@ -111,8 +136,8 @@ public class UserDAO {
             return false;
         }
     }
-    
-     public boolean updateUser(UserDTO user) {
+
+    public boolean updateUser(UserDTO user) {
         boolean success = false;
         Connection conn = null;
         PreparedStatement ps = null;
@@ -127,7 +152,7 @@ public class UserDAO {
             ps.setString(4, user.getAddress());
             ps.setString(5, user.getPhone());
             ps.setString(6, user.getUserName());
-            
+
             int rowsAffected = ps.executeUpdate();
             success = (rowsAffected > 0);
 
@@ -140,7 +165,7 @@ public class UserDAO {
 
         return success;
     }
-    
+
     public boolean create(UserDTO user) {
         boolean success = false;
         Connection conn = null;

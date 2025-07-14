@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : user-account
-    Created on : Jul 8, 2025, 8:48:11 PM
-    Author     : pc
+<%-- 
+Document   : user-account
+Created on : Jul 8, 2025, 8:48:11 PM
+Author     : pc
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,15 +16,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="assets/css02/productForm.css"> 
-    </head>
-    <body>
+        <title>Register</title>
+        <link rel="stylesheet" href="assets/css02/registerForm.css">
+        <jsp:include page = "components/link.jsp"></jsp:include>
+        <jsp:include page = "components/header.jsp"></jsp:include>
+        </head>
+
+        <body>
         <c:choose>
             <c:when test="${sessionScope.user == null}">
-
+                
+                
+                    
                 <div class="header">
-                    <a href="login.jsp" class="back-link">← Back to login page</a>
                     <h1>REGISTER USER</h1>
                 </div>
 
@@ -45,7 +49,12 @@
 
                         <div class="form-group">
                             <label for="password">Password<span class="required">*</span></label>
-                            <input type="password" id="password" name="password" value="${user.password}" />
+                            <input type="password" id="password" name="password"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password<span class="required">*</span></label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required/>
                         </div>
 
                         <div class="form-group">
@@ -62,18 +71,23 @@
                             <label for="address">Address</label>
                             <input type="text" id="address" name="address" value="${user.address}" />
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="phone">Phone</label>
                             <input type="text" id="phone" name="phone" value="${user.phone}" />
                         </div>
 
 
-                            <div class="button-group">
-                                <input type="hidden" name="keyword" value="${keyword}" />
+                        <div class="button-group">
+                            <input type="hidden" name="keyword" value="${keyword}" />
                             <input type="submit" value="Create Account"/>
                             <input type="reset" value="Reset"/>
+                            
+                            <div class="left-button">
+                                <a href="login.jsp" class="link-back-login">Login</a>
+                            </div>
                         </div>
+
                     </form>
 
                     <c:if test="${not empty checkError}">

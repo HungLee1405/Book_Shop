@@ -1,0 +1,167 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jul 14, 2025, 12:57:40 AM
+    Author     : pc
+*/
+
+/* Reset và base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f6ef;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+/* Form container */
+.form-container {
+    max-width: 600px;
+    background-color: white;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+}
+
+.required {
+    color: red;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f8f9fa;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus {
+    border-color: #4285f4;
+    background-color: #ffffff;
+    outline: none;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.left-button {
+    flex: 1 1 100%;
+}
+
+.link-back-login {
+    display: inline-block;
+    font-size: 17px;
+    color: #007bff; /* Bootstrap blue */
+    text-decoration: none;
+    margin-top: 10px;
+    transition: color 0.2s ease;
+    float: right; /* hoặc left nếu bạn muốn trái */
+}
+
+.link-back-login:hover {
+    color: #0056b3; /* darker blue */
+    text-decoration: underline;
+}
+
+
+.button-group input[type="submit"],
+.button-group input[type="reset"] {
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-group input[type="submit"] {
+    background-color: #111;
+    color: white;
+}
+
+.button-group input[type="submit"]:hover {
+    background-color: #333;
+}
+
+.button-group input[type="reset"] {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.button-group input[type="reset"]:hover {
+    background-color: #d5d5d5;
+}
+
+/* Messages */
+.error-message {
+    margin-top: 20px;
+    background-color: #ffeaa7;
+    color: #d63031;
+    padding: 12px;
+    border-left: 4px solid #d63031;
+    border-radius: 4px;
+}
+
+.success-message {
+    margin-top: 20px;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-left: 4px solid #28a745;
+    border-radius: 4px;
+}
+
+/* Access denied */
+.access-denied {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 18px;
+    color: #cc0000;
+}

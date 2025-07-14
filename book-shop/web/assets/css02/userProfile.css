@@ -7,7 +7,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: linear-gradient(135deg, #f5f2ed 0%, #ede8e0 100%);
-    padding: 20px;
 }
 
 .profile-container {

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : topContent
-    Created on : Jun 22, 2025, 1:05:57 PM
-    Author     : trang
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
