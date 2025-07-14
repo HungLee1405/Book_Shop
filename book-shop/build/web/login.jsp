@@ -11,19 +11,18 @@
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
-        <jsp:include page = "components/link.jsp"></jsp:include>
         <link rel="stylesheet" type="text/css" href="assets/css02/login.css">
-    </head>
-
-    <body>
-        
+        <jsp:include page = "components/link.jsp"></jsp:include>
         <jsp:include page = "components/header.jsp"></jsp:include>
-
         <c:choose>
             <c:when test="${not empty sessionScope.user}">
                 <c:redirect url="index.jsp"/>
             </c:when>
             <c:otherwise>
+    </head>
+
+    <body>
+        
                 <h1>Login</h1>
                 <section class = "login-form">
                     <div class = "container">
@@ -47,10 +46,13 @@
                         </c:if>
                     </div>
                 </section>
-            </c:otherwise>
-        </c:choose>
-
-        <jsp:include page = "components/footer.jsp"></jsp:include>
+            
 
     </body>
+    
+    <footer>
+        </c:otherwise>
+        </c:choose>
+        <jsp:include page = "components/footer.jsp"></jsp:include>
+    </footer>
 </html>

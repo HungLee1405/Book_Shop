@@ -25,77 +25,79 @@ Author     : pc
         <body>
         <c:choose>
             <c:when test="${sessionScope.user == null}">
-                
-                
-                    
+
                 <div class="header">
                     <h1>REGISTER USER</h1>
                 </div>
-
-                <div class="form-container">
-                    <form action="MainController" method="post">
-                        <input type="hidden" name="action" value="register"/>
-
-
-                        <div class="form-group">
-                            <label for="userName">User Name <span class="required">*</span></label>
-                            <input type="text" id="userName" name="userName" required value="${user.userName}" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="fullName">Full Name<span class="required">*</span></label>
-                            <input type="text" id="fullName" name="fullName" value="${user.fullName}" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password">Password<span class="required">*</span></label>
-                            <input type="password" id="password" name="password"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="confirmPassword">Confirm Password<span class="required">*</span></label>
-                            <input type="password" id="confirmPassword" name="confirmPassword" required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email <span class="required">*</span></label>
-                            <input type="email" id="email" name="email" value="${user.email}" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="birthDay">BirthDay</label>
-                            <input type="date" id="birthDay" name="birthDay" value="${user.birthDay}" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address">Address</label>
-                            <input type="text" id="address" name="address" value="${user.address}" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="text" id="phone" name="phone" value="${user.phone}" />
-                        </div>
+                
+                <div class="form-wrapper">
+                    <img src="https://upload.wikimedia.org/wikibooks/vi/a/a6/B%C3%ACa_s%C3%A1ch_Harry_Potter_ph%E1%BA%A7n_6.jpg" alt="book left" class="book-img book-left" />
+                    <img src="https://sachvuii.com/wp-content/uploads/2024/10/ebook-nghe-lam-phi-prc-pdf-epub.jpg" alt="book right" class="book-img book-right" /> 
+                    <div class="form-container">
+                        <form action="MainController" method="post">
+                            <input type="hidden" name="action" value="register"/>
 
 
-                        <div class="button-group">
-                            <input type="hidden" name="keyword" value="${keyword}" />
-                            <input type="submit" value="Create Account"/>
-                            <input type="reset" value="Reset"/>
-                            
-                            <div class="left-button">
-                                <a href="login.jsp" class="link-back-login">Login</a>
+                            <div class="form-group">
+                                <label for="userName">User Name <span class="required">*</span></label>
+                                <input type="text" id="userName" name="userName" required value="${user.userName}" />
                             </div>
-                        </div>
 
-                    </form>
+                            <div class="form-group">
+                                <label for="fullName">Full Name<span class="required">*</span></label>
+                                <input type="text" id="fullName" name="fullName" value="${user.fullName}" />
+                            </div>
 
-                    <c:if test="${not empty checkError}">
-                        <div class="error-message">${checkError}</div>
-                    </c:if>
-                    <c:if test="${empty checkError && not empty message}">
-                        <div class="success-message">${message}</div>
-                    </c:if>
+                            <div class="form-group">
+                                <label for="password">Password<span class="required">*</span></label>
+                                <input type="password" id="password" name="password"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password<span class="required">*</span></label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" value="${user.email}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="birthDay">BirthDay</label>
+                                <input type="date" id="birthDay" name="birthDay" value="${user.birthDay}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" id="address" name="address" value="${user.address}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" id="phone" name="phone" value="${user.phone}" />
+                            </div>
+
+
+                            <div class="button-group">
+                                <input type="hidden" name="keyword" value="${keyword}" />
+                                <input type="submit" value="Create Account"/>
+                                <input type="reset" value="Reset"/>
+
+                                <div class="left-button">
+                                    <a href="login.jsp" class="link-back-login">Login</a>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <c:if test="${not empty checkError}">
+                            <div class="error-message">${checkError}</div>
+                        </c:if>
+                        <c:if test="${empty checkError && not empty message}">
+                            <div class="success-message">${message}</div>
+                        </c:if>
+                    </div>
                 </div>
 
             </c:when>

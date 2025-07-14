@@ -32,7 +32,7 @@
                     <div class="right-element">
                         <c:choose>
                             <c:when test="${not empty sessionScope.user}">
-                                <a href="userProfile.jsp" class="user-account for-buy">  
+                                <a href="MainController?action=viewProfile&userName=${user.userName}" class="user-account for-buy">  
                                     <i class="icon icon-user"></i><span>${sessionScope.user.fullName}</span>
                                 </a>
                                 <a href="MainController?action=logout" class="logout for-buy">

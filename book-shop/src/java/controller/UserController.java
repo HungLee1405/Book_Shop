@@ -16,6 +16,7 @@ import java.sql.Date;
 import model.UserDAO;
 import model.UserDTO;
 import model.WalletDAO;
+import model.WalletDTO;
 import utils.AuthUtils;
 import utils.PasswordUtlis;
 
@@ -50,6 +51,8 @@ public class UserController extends HttpServlet {
                 url = handleUpdateProfile(request, response);
             } else if ("changePassword".equals(action)) {
                 url = handlePasswordChanging(request, response);
+            } else if ("viewProfile".equals(action)){
+                url = handleProfileViewing(request, response);
             } else {
                 request.setAttribute("message", "Invalid action: " + action);
                 url = LOGIN_PAGE;
@@ -253,6 +256,13 @@ public class UserController extends HttpServlet {
         request.setAttribute("checkError", checkError);
         request.setAttribute("message", message);
         return "changePassword.jsp";
+    }
+
+    private String handleProfileViewing(HttpServletRequest request, HttpServletResponse response) {
+        String userName = request.getParameter("userName");
+        WalletDTO wallet = wdao.getWalletByUserName(userName);
+        request.setAttribute("wallet", wallet);
+        return "userProfile.jsp";
     }
 
 }

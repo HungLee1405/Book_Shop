@@ -15,7 +15,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Prata", Georgia, serif;
     background-color: #f9f6ef;
 }
 
@@ -164,4 +164,39 @@ input[type="date"]:focus {
     margin-top: 40px;
     font-size: 18px;
     color: #cc0000;
+}
+.form-wrapper {
+    position: relative;
+    padding: 40px 20px;
+    overflow: hidden;
+}
+
+.book-img {
+    position: absolute;
+    width: 300px;
+    height: auto;
+    opacity: 0.65; /* rõ hơn nhưng vẫn nhẹ nhàng */
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Bên trái phía sau form */
+.book-left {
+    top: 35%;
+    left: 200px;
+    transform: translateY(-50%) rotate(-10deg);
+}
+
+/* Bên phải phía sau form */
+.book-right {
+    top: 65%;
+    right: 200px;
+    transform: translateY(-50%) rotate(10deg);
+}
+
+
+/* Đảm bảo form nằm trên ảnh */
+.form-container {
+    position: relative;
+    z-index: 1;
 }

@@ -25,14 +25,14 @@
                     <!-- Avatar -->
                     <div class="avatar-section">
                         <h3>Avatar</h3>
-                        <img src="assets/img/default-avatar.png" alt="Avatar" class="avatar-img"/>
+                        <img src="https://phanmemmkt.vn/wp-content/uploads/2024/09/Hinh-anh-dai-dien-mac-dinh-Facebook.jpg" alt="Avatar" class="avatar-img"/>
                     </div>
 
                     <!-- Wallet -->
                     <div class="wallet-section">
                         <h3>Shopping wallet</h3>
                         <div class="wallet-box">
-                            Balance amount: <strong>${sessionScope.wallet.balance} Vnd</strong>
+                            Balance amount: <strong>${wallet.balance} Vnd</strong>
                     </div>
                 </div>
             </div>
