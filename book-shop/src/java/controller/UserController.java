@@ -12,12 +12,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import model.UserDAO;
 import model.UserDTO;
 import model.WalletDAO;
 import model.WalletDTO;
 import utils.AuthUtils;
+import utils.DbUtils;
 import utils.PasswordUtlis;
 
 /**
@@ -51,7 +55,7 @@ public class UserController extends HttpServlet {
                 url = handleUpdateProfile(request, response);
             } else if ("changePassword".equals(action)) {
                 url = handlePasswordChanging(request, response);
-            } else if ("viewProfile".equals(action)){
+            } else if ("viewProfile".equals(action)) {
                 url = handleProfileViewing(request, response);
             } else {
                 request.setAttribute("message", "Invalid action: " + action);
@@ -114,19 +118,22 @@ public class UserController extends HttpServlet {
         String phone = request.getParameter("phone");
 
         if (userName == null || userName.trim().isEmpty()) {
-            checkError += "<br/>Username is required.";
+            checkError += "Username is required.";
         }
 
+        if (udao.getUserByUserName(userName).getUserName().equals(userName)) {
+            checkError += "This Username already exists, please choose another Username.<br/>";
+        }
         if (fullName == null || fullName.trim().isEmpty()) {
-            checkError += "<br/>Full Name is required.";
+            checkError += "Full Name is required.";
         }
 
         if (password == null || password.trim().isEmpty()) {
-            checkError += "<br/>Password is required.";
+            checkError += "Password is required.";
         }
-        
+
         if (!password.equals(confirmPass)) {
-            checkError = "password and confirmation do not match.";
+            checkError += "password and confirmation do not match.<br/>";
         }
 
         Date BirthDay = null;
@@ -136,11 +143,11 @@ public class UserController extends HttpServlet {
 
                 Date today = new Date(System.currentTimeMillis());
                 if (BirthDay.after(today)) {
-                    checkError += "<br/> Birth Day must be in the past.";
+                    checkError += "Birth Day must be in the past.<br/>";
                 }
             }
         } catch (Exception e) {
-            checkError += "<br/> Invalid Birth Day.";
+            checkError += "Invalid Birth Day.<br/>";
         }
 
         UserDTO user = new UserDTO(userName, fullName, password, phone, email, BirthDay, address, phone, true);

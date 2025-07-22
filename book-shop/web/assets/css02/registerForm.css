@@ -1,202 +1,163 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Jul 14, 2025, 12:57:40 AM
-    Author     : pc
-*/
-
-/* Reset và base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 body {
-    font-family: "Prata", Georgia, serif;
-    background-color: #f9f6ef;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f6f8;
 }
 
-/* Header */
-.header {
-    text-align: center;
+.home-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px; /* 👈 Put it on the right instead of left */
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+    z-index: 10;
+    transition: color 0.3s ease;
+}
+
+.home-icon:hover {
+    color: #007bff;
+}
+
+/* Container layout */
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Left panel */
+.left-panel {
+    flex: 1;
+    background: url(https://perhapsmaybenot.com/wp-content/uploads/2022/10/Booktok.png) no-repeat center center;
+    background-size: cover;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.left-panel h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.left-panel p {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+/* Right panel */
+.right-panel {
+    flex: 1;
+    background: #fff;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Form styling */
+form {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+form h2 {
     margin-bottom: 30px;
-}
-
-.header h1 {
-    font-size: 28px;
+    font-size: 32px;
     color: #333;
 }
 
-/* Form container */
-.form-container {
-    max-width: 600px;
-    background-color: white;
-    margin: 0 auto;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
+/* Form group with icon support */
 .form-group {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    margin-bottom: 20px;
 }
 
-label {
+.form-group label {
+    display: block;
     margin-bottom: 6px;
     font-weight: 500;
     color: #333;
 }
 
-.required {
-    color: red;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"] {
-    padding: 12px;
+.form-group input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    padding-left: 40px;
+    font-size: 15px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    background-color: #f8f9fa;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="date"]:focus {
-    border-color: #4285f4;
-    background-color: #ffffff;
-    outline: none;
-}
-
-/* Buttons */
-.button-group {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.left-button {
-    flex: 1 1 100%;
-}
-
-.link-back-login {
-    display: inline-block;
-    font-size: 17px;
-    color: #007bff; /* Bootstrap blue */
-    text-decoration: none;
-    margin-top: 10px;
-    transition: color 0.2s ease;
-    float: right; /* hoặc left nếu bạn muốn trái */
-}
-
-.link-back-login:hover {
-    color: #0056b3; /* darker blue */
-    text-decoration: underline;
-}
-
-
-.button-group input[type="submit"],
-.button-group input[type="reset"] {
-    padding: 12px 20px;
-    font-size: 18px;
-    font-weight: 500;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.button-group input[type="submit"] {
-    background-color: #111;
-    color: white;
-}
-
-.button-group input[type="submit"]:hover {
-    background-color: #333;
-}
-
-.button-group input[type="reset"] {
-    background-color: #e0e0e0;
-    color: #333;
-}
-
-.button-group input[type="reset"]:hover {
-    background-color: #d5d5d5;
-}
-
-/* Messages */
-.error-message {
-    margin-top: 20px;
-    background-color: #ffeaa7;
-    color: #d63031;
-    padding: 12px;
-    border-left: 4px solid #d63031;
-    border-radius: 4px;
-}
-
-.success-message {
-    margin-top: 20px;
-    background-color: #d4edda;
-    color: #155724;
-    padding: 12px;
-    border-left: 4px solid #28a745;
-    border-radius: 4px;
-}
-
-/* Access denied */
-.access-denied {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 18px;
-    color: #cc0000;
-}
-.form-wrapper {
-    position: relative;
-    padding: 40px 20px;
-    overflow: hidden;
-}
-
-.book-img {
+.form-group i {
     position: absolute;
-    width: 300px;
-    height: auto;
-    opacity: 0.65; /* rõ hơn nhưng vẫn nhẹ nhàng */
-    z-index: 0;
+    left: 12px;
+    top: 40px;
+    font-size: 16px;
+    color: #777;
     pointer-events: none;
 }
 
-/* Bên trái phía sau form */
-.book-left {
-    top: 35%;
-    left: 200px;
-    transform: translateY(-50%) rotate(-10deg);
+/* Buttons */
+form input[type="submit"],
+form input[type="reset"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #2f4f4f;
+    color: white;
+    transition: background-color 0.3s;
 }
 
-/* Bên phải phía sau form */
-.book-right {
+form input[type="reset"] {
+    background-color: #888;
+}
+
+form input[type="submit"]:hover {
+    background-color: #1e3939;
+}
+
+form a {
+    display: block;
+    margin-top: 10px;
+    color: #3a3a3a;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* Message styles */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.toggle-password {
+    position: absolute;
     top: 65%;
-    right: 200px;
-    transform: translateY(-50%) rotate(10deg);
-}
-
-
-/* Đảm bảo form nằm trên ảnh */
-.form-container {
-    position: relative;
-    z-index: 1;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
 }

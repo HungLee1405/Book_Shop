@@ -13,13 +13,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Profile</title>
+        <link rel="stylesheet" href="assets/css02/userProfile.css"/>
         <jsp:include page = "components/link.jsp"></jsp:include>
-            <link rel="stylesheet" href="assets/css02/userProfile.css"/>
         <jsp:include page = "components/header.jsp"></jsp:include>
         </head>
 
         <body>
-        
+
             <div class="profile-container">
                 <div class="left-column">
                     <!-- Avatar -->
@@ -57,7 +57,7 @@
                         <input type="email" name="email" value="${user.email}" required/>
 
                         <label>Phone number</label>
-                        <input type="text" name="phone" value="${user.phone}" required/>
+                        <input type="number" name="phone" value="${user.phone}" required/>
 
                         <label>Birthdate</label>
                         <input type="date" name="birthDay" value="${user.birthDay}" />
